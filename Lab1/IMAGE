@@ -1,0 +1,15 @@
+!============================= bs.s file ===============================
+
+.globl _main, _prints, NSEC 				!import from C
+.globl _getc, _putc, _readfd, _setes, _inces, _error    !export to C
+	BOOTSEF  =  0x9800  	! booter segment
+	OSSEG    =  0x1000  	! MTX kernel segment
+	SSP	 =  32*1024 	! booter stack size = 32KB
+	BSECTORS =  2		! number of sectors to initially load
+
+! Boot SECTOR loaded at (0000:7c00). reload booter to segment 0x9800
+start:
+	mov ax, #BOOTSEG	!  set ES to 0x9800
+	mov es, ax
+
+! call BIOS I

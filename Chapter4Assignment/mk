@@ -1,0 +1,16 @@
+#! /bin/sh
+
+as86 -o ts.o ts.s
+bcc -c -ansi t.c
+ld86 -d -o mtx0 ts.o t.o /usr/lib/bcc/libc.a
+
+
+echo mount FDimage on /mnt
+sudo mount -o loop FDimage /mnt
+sudo cp mtx0 /mnt/boot
+sudo umount /mnt
+
+echo ready to go?
+read yeah
+
+qemu-system-i386 -fda FDimage -no-fd-bootchk
