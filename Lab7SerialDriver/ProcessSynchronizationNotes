@@ -1,0 +1,39 @@
+A Critical Region is a sequence of operations on shared data objects by only one
+process at a time. Theyre intended to protect shared objects, not code. Pieces
+of code are  part of the same critical region if they access the same shared
+data objects.
+
+The Intel x86 CPU uses a bit in the flag register to enable and disable interrupts.
+
+#define int_off { int SR = lock(); }
+#define int_on  { unlock(SR);}
+
+lock() diables CPU interrupts and returns the original CPU status register.
+unlock() restores CPU status register to its original value.
+
+If a process is executing and an interrupt occurs, the process is diverted to
+handle the interrupt. This interferes with the process. To prevent this, we can
+disable interrupts upon entry to sleep or wakeup, and enable them again once the
+process finishes its task.
+
+sleep(int event)
+{
+  int_off;
+  //same code
+  int_on;
+}
+
+A semaphore is a data structure:
+
+struct semaphore{
+  byte lock;
+  int value;
+  PROC *queue;
+};
+
+lock represents the critical region
+value is the initial value of the semaphore
+queue is a queue of processes blocked on the semaphore
+
+All operations on a semaphore must be performed in the same critical region of
+the semaphores lock.

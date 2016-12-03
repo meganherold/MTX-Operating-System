@@ -1,0 +1,45 @@
+Chapter 10.6, Serial Port Driver
+
+A serial port is a communication interface through which information transfers
+in and out ONE BIT AT A TIME (in contrast to a parallel port). Serial ports
+transfer data from computers to modems, printers, terminals, etc.
+
+Data Terminal Equipment: computer (usually male)
+Data Communication Equipment: modem or serial printer (usually female)
+
+To establish a serial connection between a DTE and DCE:
+1. computer asserts the Data Terminal Ready
+    (informs the serial that its ready)
+2. serial responds by asserting Data Set Ready and Data Carrier Detect
+    (informs the computer that its ready too)
+3. when the computer has data to send, it asserts Request To Send
+    (asks the serial for request to send)
+4. if the serial is ready to receive data, it asserts Clear To Send
+5. computer can send data through Tx while CTS is on
+6. serial can send data through Rx to the computer anytime without asking first
+
+Most PCs have two serial ports, called COM1 and COM2. These are DTEs by default,
+and intended to connect to DCEs.
+
+A Serial Terminal generates ASCII code. A virtual serial terminal is a device that
+emulates a real serial terminal.
+
+Each serial port is represented by a stty structure:
+  struct stty {
+    // input section
+    char inbuf[BUFLEN]; //stores input chars
+    int inhead,intail;
+    SEMAPHORE inchars; //for synchronization
+
+    // output section
+    char outbuf[BUFLEN]; //stores outgoing chars
+    int outhead,outtail;
+    SEMAPHORE outspace; //for synchronization
+
+    // Control section
+    char erase,kill,intr; //control chars
+    char x_on,x_off,tx_on;
+
+    // I/O port base address
+    int port;
+  } stty[NSTTY]; // NSTTY = mumber of serial ports
