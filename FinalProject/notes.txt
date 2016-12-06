@@ -1,0 +1,8 @@
+Things I had to change to get KC's scripts to run:
+  qemu to qemu-system-i386
+  ./ and sudo needed in some places
+  520m to 520M in q script
+  changed MTXinstallCD.iso to vdisk
+  using q 16
+
+Init
