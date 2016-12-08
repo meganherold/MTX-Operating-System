@@ -70,7 +70,7 @@ int do_command(char *commandline)
   char line_copy[300], new_command[300], *line_tokens[10], *command;
   char* redirect = "";
 
-  printf("megan's do_command\n");
+  //printf("megan's do_command\n");
 
   //first, break commandline up into tokens
   strcpy(line_copy, commandline);
@@ -160,7 +160,7 @@ int do_command(char *commandline)
     }
   }
 
-  printf("do_command: excecuting %s\n", new_command);
+  //printf("do_command: excecuting %s\n", new_command);
   exec(new_command);
   return 1;
 }
@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
 {
   int num_tokens = 0, pid, status;
   char line[300], line_copy[300], *line_tokens[10], *command;
-  printf("hello, this is sh.c!\n");
+  //printf("hello, this is sh.c!\n");
 
   while(1)
   {
@@ -237,6 +237,6 @@ int main(int argc, char *argv[])
       else
         do_pipe(line, 0);
     }
-    printf("bottom of while loop\n");
+    //printf("bottom of while loop\n");
   }
 }
