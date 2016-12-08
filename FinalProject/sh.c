@@ -39,7 +39,7 @@ int do_pipe(char *commandline, int *pipe_descriptor)
   }
 
   has_pipe = scan(commandline, &head, &tail);
-  printf("do_pipe: head=%s tail=%s\n", head, tail);
+  //printf("do_pipe: head=%s tail=%s\n", head, tail);
 
   if(has_pipe)
   {
