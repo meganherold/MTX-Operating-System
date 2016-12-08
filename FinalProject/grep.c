@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
   int file_descriptor, bytes_read, line_number, i;
-  char buffer[300], *pointer;
+  char buffer[200], *pointer;
 
   if(argc == 2) //grep and pattern, using stdin
     file_descriptor = 0;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
   }
 
   //get one line at a time?
-  bytes_read = nget_line(file_descriptor, buffer);
+  bytes_read = get_line(file_descriptor, buffer);
   line_number = 1;
   while(bytes_read > 0)
   {
@@ -41,20 +41,20 @@ int main(int argc, char *argv[])
     {
       if(strncmp(pointer, argv[1], strlen(argv[1])) == 0)
       {
-        printf("%d: %s\r", line_number, buffer);
+        printf("%d %s\r", line_number, buffer);
         break;
       }
       pointer++;
     }
 
     //clear out the buffer so we can use it again
-    for(i = 0; i < 300; i++)
+    for(i = 0; i < 200; i++)
     {
       buffer[i] = 0;
     }
 
     //get the next line from the file
-    bytes_read = nget_line(file_descriptor, buffer);
+    bytes_read = get_line(file_descriptor, buffer);
     line_number++;
   }
 

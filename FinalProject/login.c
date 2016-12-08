@@ -26,7 +26,7 @@ int is_user_valid()
   file = open("/etc/passwd", 0);
 
   //verify user name and passwd from /etc/passwd file
-  while(get_line(file, line))
+  while(get_line(file, line) > 0)
   {
     //tokenize account line to get username and password
     //printf("line: %s\n", line);
