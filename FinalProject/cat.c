@@ -4,7 +4,7 @@ int main (int argc, char *argv[])
 {
   char character;
   int file_descriptor;
-  printf("megan's cute cat meow ^.^\n");
+  //printf("megan's cute cat meow ^.^\n");
 
   if(argc > 1) //we're reading from a file
   {
@@ -16,7 +16,7 @@ int main (int argc, char *argv[])
     }
   }
   else //we're reading from stdin
-    file_descriptor = 0;
+    file_descriptor = dup(0);
 
   //printf("file_descriptor = %d\n", file_descriptor);
 

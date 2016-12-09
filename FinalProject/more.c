@@ -32,12 +32,18 @@ int main(int argc, char* argv[])
   int bytes_read, line_number, i = 0;
   char buffer[200], user_input;
 
-  //open the file we'll be reading
-  file_descriptor = open(argv[1], O_RDONLY);
-  if(file_descriptor < 0)
+  //open the file we'll be reading (or stdin)
+  if(argc == 1)
+    file_descriptor = dup(0);
+
+  if(argc == 2)
   {
-    printf("failed to open file %s for reading.\n");
-    return 0;
+    file_descriptor = open(argv[1], O_RDONLY);
+    if(file_descriptor < 0)
+    {
+      printf("failed to open file %s for reading.\n");
+      return 0;
+    }
   }
 
   //first, write one page worth of lines to the screen

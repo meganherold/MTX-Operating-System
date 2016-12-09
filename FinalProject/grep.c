@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
   char buffer[200], *pointer;
 
   if(argc == 2) //grep and pattern, using stdin
-    file_descriptor = 0;
+    file_descriptor = dup(0);
 
   else if(argc == 3)
   {
